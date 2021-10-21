@@ -53,15 +53,12 @@ def plot_actual_vs_predicted(dataset, model, cfg, n_images=5):
 	plt.show()
 
 
-def plot_video_pred(sample, model):
-    yhat = model.detect(sample, verbose=0)[0]
-    # plot each box
-	for box in yhat['rois']:
-        # get coordinates
-		y1, x1, y2, x2 = box
-        # create the shape
-		cv2.rectangle((x1, y1), (x2, y2), (255,0,255), 2)
-    # show the figure
-	cv2.imshow("Prediction", sample)
-    cv2.waitKey(20)
-    
+def plot_video_pred(img, sample, model):
+	yhat = model.detect(sample, verbose=0)[0]
+	# plot each box
+	try:
+		for box in yhat['rois']:
+			y1, x1, y2, x2 = box
+			cv2.rectangle(img,(x1, y1), (x2, y2), (255,0,255), 2)
+	except:
+		pass

@@ -3,3 +3,4 @@
 /datasets
 /model/mask_rcnn_coco.h5
 /model
+/utils/__pycache__
