@@ -53,7 +53,7 @@ def plot_actual_vs_predicted(dataset, model, cfg, n_images=5):
 	plt.show()
 
 
-def plot_video_pred(img, sample, model):
+def prediction(img, sample, model):
 	yhat = model.detect(sample, verbose=0)[0]
 	# plot each box
 	try:
