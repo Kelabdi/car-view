@@ -1,5 +1,5 @@
 import sys
-from pred_video import play_video
+from main import play_video
 
 print("Loading video...")
 filename = sys.argv[1]
