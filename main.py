@@ -9,8 +9,6 @@ warnings.filterwarnings("ignore")
 
 
 
-filename = "ferrari.mp4"
-
 def play_video(filename):
     cap = cv2.VideoCapture("videos/" + filename)
     while True:
@@ -44,6 +42,8 @@ def save_video(filename):
                 i+=1
             else:
                 break
+    chdir(f"../..")
+    cv2.destroyAllWindows()
         
 
 def show_pred_video(filename):
@@ -53,15 +53,17 @@ def show_pred_video(filename):
     with open(Path + "/pred_boxes.json", 'r') as f:
         boxes = json.load(f)
     print("json loaded")
+    print(len(boxes))
     # AQUI HAY QUE MONTAR UNA FUNCION BONITA
     ptime = 0
-    fr_num = len([name for name in listdir(Path)]) - 1
+    sorted_images = sorted([name for name in listdir(Path) if ".jpg" in name])
+    fr_num = len(sorted_images)
     print(fr_num)
 
     #for i in range(fr_num):
     i = 0
     while i<fr_num:
-        img = cv2.imread(Path + f"/{i}.jpg")
+        img = cv2.imread(Path + f"/{sorted_images[i]}")
         # Put FPS Counter
         #ctime = time.time()
         #fps = 1/(ctime - ptime)
@@ -70,18 +72,21 @@ def show_pred_video(filename):
         #        1.5, (0,255,0),2)
         # ploting prediction
         # plot_video_pred(img, sample, model)
-        if i%10 == 0:
-            try:
-                for box in boxes[i]:
-                    x1, y1, x2, y2 = box
-                    cv2.rectangle(img,(x1, y1), (x2, y2), (255,0,255), 2)
-                    print("rect" + "%"*20)
-            except:
-                pass
+        try:
+            for box in boxes[i]:
+                x1, y1, x2, y2 = box
+                cv2.rectangle(img,(x1, y1), (x2, y2), (0,255,0), 2)
+                cv2.waitKey(20)
+                print(boxes[i])
+                print("rect" + "%"*20)
+        except:
+            pass
+        
         cv2.imshow("Prediction", img)
         cv2.waitKey(20)
         i+=1
-        
+    print(i)
+    cv2.destroyAllWindows()
 
 def pred_video(filename):
     path = "frames/" + filename
@@ -92,15 +97,15 @@ def pred_video(filename):
     print("model loaded "+"%"*20)
     pred_list = []
     # Percentage for data predicted
-    per100 = len([name for name in listdir(path)])
+    sorted_images = sorted([name for name in listdir(path) if ".jpg" in name])
+    per100 = len(sorted_images)
     p = 1
 
-    for name in listdir(path):
-        if p%10 == 0:  
-            img = cv2.imread(path + f"/{name}")
-            sample = adapt_image(img, predconfig)
-            boxes = prediction(sample, model)
-            pred_list.append(boxes)
+    for name in sorted_images:
+        img = cv2.imread(path + f"/{name}")
+        sample = adapt_image(img, predconfig)
+        boxes = prediction(sample, model)
+        pred_list.append(boxes)
         print("predicting... " + str(int(100*p/per100)) + " %")
         p+=1
     with open(path + "/pred_boxes.json", 'w') as f:
@@ -116,16 +121,20 @@ def pred_image(filename):
     model.load_weights("model/mask_rcnn_car_0009.h5", by_name=True)    
     # predicting boxes
     img = cv2.imread(Path + filename)
+    img = cv2.resize(img, (960,540))
     sample = adapt_image(img, predconfig)
     boxes = prediction(sample, model)
     try:
         for box in boxes:
             x1, y1, x2, y2 = box
-            cv2.rectangle(img,(x1, y1), (x2, y2), (255,0,255), 2)
+            cv2.rectangle(img,(x1, y1), (x2, y2), (0,255,0), 2)
             print("rect" + "%"*20)
     except:
         pass
     cv2.imshow("Prediction", img)
+    if cv2.waitKey(0) == 27:
+        cv2.destroyAllWindows()
+
     
 
 
