@@ -1,9 +1,7 @@
-/Mask_RCNN
 .ipynb_checkpoints/
-/datasets
-/model/mask_rcnn_coco.h5
 /model
 /utils/__pycache__
 __pycache__
 /frames
 /images
+/videos

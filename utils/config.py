@@ -14,4 +14,4 @@ class CarPredictionConfig(Config):
     NUM_CLASSES = 2
     GPU_COUNT = 1
     IMAGES_PER_GPU = 1
-    DETECTION_MIN_CONFIDENCE = 0.98
+    DETECTION_MIN_CONFIDENCE = 0.80

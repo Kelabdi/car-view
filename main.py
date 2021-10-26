@@ -63,7 +63,7 @@ def show_pred_video(filename):
     #for i in range(fr_num):
     i = 0
     while i<fr_num:
-        img = cv2.imread(Path + f"/{sorted_images[i]}")
+        img = cv2.imread(Path + f"/{i}.jpg")
         # Put FPS Counter
         #ctime = time.time()
         #fps = 1/(ctime - ptime)
@@ -76,9 +76,9 @@ def show_pred_video(filename):
             for box in boxes[i]:
                 x1, y1, x2, y2 = box
                 cv2.rectangle(img,(x1, y1), (x2, y2), (0,255,0), 2)
-                cv2.waitKey(20)
                 print(boxes[i])
                 print("rect" + "%"*20)
+            cv2.waitKey(1)
         except:
             pass
         
@@ -101,8 +101,8 @@ def pred_video(filename):
     per100 = len(sorted_images)
     p = 1
 
-    for name in sorted_images:
-        img = cv2.imread(path + f"/{name}")
+    for i in range(per100):
+        img = cv2.imread(path + f"/{i}.jpg")
         sample = adapt_image(img, predconfig)
         boxes = prediction(sample, model)
         pred_list.append(boxes)
@@ -124,6 +124,7 @@ def pred_image(filename):
     img = cv2.resize(img, (960,540))
     sample = adapt_image(img, predconfig)
     boxes = prediction(sample, model)
+    cv2.destroyAllWindows()
     try:
         for box in boxes:
             x1, y1, x2, y2 = box
@@ -135,7 +136,12 @@ def pred_image(filename):
     if cv2.waitKey(0) == 27:
         cv2.destroyAllWindows()
 
-    
+def display_image(filename):
+    Path = "images/"
+    img = cv2.imread(Path + filename)
+    img = cv2.resize(img, (960,540))
+    cv2.imshow(f"{filename}", img)
+    cv2.waitKey(0)
 
 
 

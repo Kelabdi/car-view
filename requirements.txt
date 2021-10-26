@@ -1,0 +1,11 @@
+h5py==2.10.0
+Keras==2.0.8
+mask-rcnn==2.1
+matplotlib==3.3.4
+notebook==6.4.5
+numpy==1.19.5
+opencv-python==4.5.3.56
+pandas==1.1.5
+scikit-image==0.17.2
+scikit-learn==0.24.2
+tensorflow==1.15.0
