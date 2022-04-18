@@ -4,7 +4,7 @@
 
 This is my Final Project for the **Big Data & Machine Learning Bootcamp** I am taking at Core CODE School.
 
-**Car view Project**: Predicting model for car detection from images and videos (wip: traffic signals, people, etc). 
+**Car view Project**: Predicting model for car detection from images and videos. 
 
 ___
 
@@ -92,6 +92,10 @@ python predict_video.py <filename>
     <img src="/img/pred3.png" />
 </p>
 
+<p align="center">
+    <img src="/img/pred2.png" />
+</p>
+
 ## Contribuiting
 
 You can send a pull-request if you want to share some improvements/ideas.
@@ -101,6 +105,7 @@ You can send a pull-request if you want to share some improvements/ideas.
 Thanks for this tools and free access info to:
 
 [Matterport](https://github.com/matterport/Mask_RCNN) (Mask R-CNN repository)
+
 [Jason Brownlee](https://machinelearningmastery.com/how-to-train-an-object-detection-model-with-keras/) (very helpful post)
 
 ## Thanks to
