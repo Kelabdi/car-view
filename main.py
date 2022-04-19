@@ -142,10 +142,3 @@ def display_image(filename):
     img = cv2.resize(img, (960,540))
     cv2.imshow(f"{filename}", img)
     cv2.waitKey(0)
-
-
-
-
-#Presentacion
-#sacar metricas
-#probar con videos
